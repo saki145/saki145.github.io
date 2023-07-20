@@ -10,11 +10,11 @@ h1 {
 
 .class2 {
 	min-width: 100px;
-  appearance: none;
-  border: 0;
-  border-radius: 5px;
-  background: #4676D7;
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 18px;
+	appearance: none;
+	border: 0;
+	border-radius: 5px;
+	background: #4676D7;
+	color: #fff;
+	padding: 10px 20px;
+	font-size: 18px;
 }
