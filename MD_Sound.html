@@ -31,6 +31,9 @@ var response = {
     "兵庫の天気": ["兵庫県の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/28/"]
 };
 
+// ウエイクワードの定義
+var wake_word = ".*花子さん.*遊びましょ.*";
+
 const startButton = document.querySelector('#startButton'); // 開始ボタン
 const stopButton = document.querySelector('#stopButton'); // 停止ボタン
 const resultOutput = document.querySelector('#resultOutput'); // 結果出力エリア
