@@ -7,15 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
+<link rel="stylesheet" type="text/css" href="MD_Sound.css"/>
 <title>Spoken Dialog by Javascript</title>
 </head>
 <body>
 
-<h1>認識結果に対応するウェブページを表示してみよう</h1>
+<h1>花子さんと遊ぼ</h1>
 
 <p>
+<div class="class1">
+<img class="fit-picture" src="./hanakosan.png" alt="花子さん" width="255"/>
+</div>
+<div class="class2">
 <button id="startButton">start</button>
 <button id="stopButton">stop</button>
+</div>
 </p>
 
 <p>
@@ -26,10 +32,10 @@
 // 応答の定義（ハッシュ）    
 var response = {
     "和歌山の天気": ["和歌山県の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/30/"],
-    "大阪の天気": ["大阪府の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/27/"],
-    "京都の天気": ["京都府の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/26/"],
-    "奈良の天気": ["奈良県の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/29/"],
-    "兵庫の天気": ["兵庫県の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/28/"]
+    ".*大阪.*天気.*": ["大阪府の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/27/"],
+    "口裂け女": ["口裂け女について教えてあげる", "https://ja.wikipedia.org/wiki/%E5%8F%A3%E8%A3%82%E3%81%91%E5%A5%B3"],
+    "奈良,天気": ["奈良県の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/29/"],
+    "かまいたち": ["かまいたちについて教えてあげる", "https://uidhibiasudhiu.com/yokai-kamaitachi-sanbiki/"]
 };
 
 // ウエイクワードの定義
@@ -45,9 +51,9 @@ if (!'SpeechSynthesisUtterance' in window) {
 const tts = new SpeechSynthesisUtterance(); // TTSインスタンスを生成
 //tts.text = textForm.value; // テキストを設定
 tts.lang = "ja-JP"; // 言語(日本語)、英語の場合はen-US
-tts.rate = 0.5; // 速度
-tts.pitch = 1.5; // 声の高さ
-tts.volume = 0.8; // 音量
+tts.rate = 1.0; // 速度
+tts.pitch = 1.0; // 声の高さ
+tts.volume = 1.0; // 音量
 
 SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
 if (!'SpeechRecognition' in window) {
@@ -80,7 +86,27 @@ asr.onresult = function(event){
 					let answer;
 					let webpage;
         
-					if(typeof ret == 'undefined'){
+					// word変数の中で、単語がループを繰り返す
+					let keys = Object.keys(response);
+					keys.forEach(function(key) {
+						let flag = true;
+						console.log(transcript);
+						key.split(',').forEach(function(word) {              
+							let pattern = new RegExp(word);
+							let flag_test = pattern.test(transcript); // マッチしたらtrue, しなかったらfalse
+							flag = flag && flag_test; // 両方trueならtrue
+              console.log(pattern + '+' + ':' + flag_test);
+              //flag = flag && new RegExp(word).test(transcript);
+						});
+
+						// flagがtrueの時、ここまでの評価でwordの順序は関係ない
+						if(flag){
+							answer = response[key];
+							console.log(key + " : " + answer);
+						}
+					});
+				
+				if(typeof ret == 'undefined'){
 						answer = "ごめんなさい。わかりません。";
 					}else{
 						answer = ret[0];
