@@ -2,23 +2,39 @@ body {
 	background-color: black;
 }
 
-h1 {
-	font-size: 200%;
-	color: #FFFACD;
-	background-color: #CC0000;
+audio {
+	position: fixed;
+	display: block;
+	top: 95%;
+	right: 0px;
 }
 
-.class1 {
-  text-align: center;
+#title {
+	position: fixed;
+	display: block;
+	left: 15%;
 }
 
-.class2 {
-	min-width: 100px;
-	appearance: none;
-	border: 0;
-	border-radius: 5px;
-	/*background: #4676D7;*/
-	color: #fff;
-	padding: 10px 20px;
-	font-size: 18px;
+#fit-picture {
+	position: fixed;
+	display: block;
+	top: 17%;
+	left: 37%;
+	width: 350px;
+}
+
+#hanasu-btn {
+	position: fixed;
+	display: block;
+	top: 500px;
+	left: 10%;
+	width: 10%;
+}
+
+#yameru-btn {
+	position: fixed;
+	display: block;
+	top: 500px;
+	right: 10%;
+	width: 10%;
 }
