@@ -4,7 +4,7 @@ body {
 
 audio {
 	position: fixed;
-	display: block;
+	display: none;
 	top: 95%;
 	right: 0px;
 }
@@ -23,10 +23,18 @@ audio {
 	width: 350px;
 }
 
+#itiran {
+	position: fixed;
+	display: block;
+	top: 20%;
+	left: 10%;
+	width: 250px;
+}
+
 #hanasu-btn {
 	position: fixed;
 	display: block;
-	top: 500px;
+	top: 600px;
 	left: 10%;
 	width: 10%;
 }
@@ -34,7 +42,7 @@ audio {
 #yameru-btn {
 	position: fixed;
 	display: block;
-	top: 500px;
+	top: 600px;
 	right: 10%;
 	width: 10%;
 }
